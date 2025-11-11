@@ -1,0 +1,51 @@
+{
+    "compilerOptions": {
+        /* Shared/common compiler options */
+        "module": "ESNext",
+        "moduleResolution": "bundler",
+        "allowImportingTsExtensions": true,
+        "verbatimModuleSyntax": true,
+        "moduleDetection": "force",
+        "skipLibCheck": true,
+        "noEmit": true,
+        /* Strictness / linting flags shared across targets */
+        "strict": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "noFallthroughCasesInSwitch": true,
+        /* Path aliases (kept here if both targets share them) */
+        "baseUrl": ".",
+        "paths": {
+            "@/*": [
+                "./src/*"
+            ],
+            "@assets/*": [
+                "./src/assets/*"
+            ],
+            "@components/*": [
+                "./src/components/*"
+            ],
+            "@layouts/*": [
+                "./src/layouts/*"
+            ],
+            "@pages/*": [
+                "./src/pages/*"
+            ],
+            "@hooks/*": [
+                "./src/hooks/*"
+            ],
+            "@services/*": [
+                "./src/services/*"
+            ],
+            "@routes/*": [
+                "./src/routes/*"
+            ],
+            "@utils/*": [
+                "./src/utils/*"
+            ],
+            "@types/*": [
+                "./src/types/*"
+            ]
+        }
+    }
+}
