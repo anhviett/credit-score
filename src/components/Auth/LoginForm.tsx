@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Button, Checkbox, Form, Input, Flex } from 'antd';
-import { UserOutlined, LockOutlined } from '@ant-design/icons';
-import { FORM_ITEM_LAYOUT, TAIL_FORM_ITEM_LAYOUT } from '@/constants/formLayouts';
+import { Button, Checkbox, Form, Input, Flex } from "antd";
+import { UserOutlined, LockOutlined } from "@ant-design/icons";
+import {
+  FORM_ITEM_LAYOUT,
+  TAIL_FORM_ITEM_LAYOUT,
+} from "@/constants/formLayouts";
 
 export default function LoginForm() {
   const navigate = useNavigate();
@@ -17,7 +20,7 @@ export default function LoginForm() {
   };
 
   const onFinish = (values: any) => {
-    console.log('Received values of form: ', values);
+    console.log("Received values of form: ", values);
   };
 
   return (
@@ -30,20 +33,30 @@ export default function LoginForm() {
     >
       <Form.Item
         name="username"
-        rules={[{ required: true, message: 'Please input your Username!' }]}
+        rules={[{ required: true, message: "Please input your Username!" }]}
         className="flex-1"
       >
         <Input prefix={<UserOutlined />} placeholder="Username" />
       </Form.Item>
       <Form.Item
         name="password"
-        rules={[{ required: true, message: 'Please input your Password!' }]}
+        rules={[{ required: true, message: "Please input your Password!" }]}
       >
-        <Input className="flex-1" prefix={<LockOutlined />} type="password" placeholder="Password" />
+        <Input
+          className="flex-1"
+          prefix={<LockOutlined />}
+          type="password"
+          placeholder="Password"
+        />
       </Form.Item>
       <Form.Item>
         <Flex justify="space-between" align="center">
-          <Form.Item name="remember" valuePropName="checked" noStyle style={{ flex: 1 }}>
+          <Form.Item
+            name="remember"
+            valuePropName="checked"
+            noStyle
+            style={{ flex: 1 }}
+          >
             <Checkbox>Remember me</Checkbox>
           </Form.Item>
           <a href="">Forgot password</a>

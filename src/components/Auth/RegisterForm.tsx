@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import type { CascaderProps, FormItemProps, FormProps } from 'antd';
+import type { CascaderProps, FormItemProps, FormProps } from "antd";
 import {
   AutoComplete,
   Button,
@@ -12,8 +12,11 @@ import {
   InputNumber,
   Row,
   Select,
-} from 'antd';
-import { FORM_ITEM_LAYOUT, TAIL_FORM_ITEM_LAYOUT } from '@/constants/formLayouts';
+} from "antd";
+import {
+  FORM_ITEM_LAYOUT,
+  TAIL_FORM_ITEM_LAYOUT,
+} from "@/constants/formLayouts";
 
 export default function RegisterForm() {
   const navigate = useNavigate();
@@ -33,17 +36,17 @@ export default function RegisterForm() {
   const [form] = Form.useForm();
 
   const onFinish = (values: any) => {
-    console.log('Received values of form: ', values);
+    console.log("Received values of form: ", values);
   };
 
   const prefixSelector = (
     <Form.Item name="prefix" noStyle>
       <Select
         style={{ width: 70 }}
-        defaultValue={'86'}
+        defaultValue={"86"}
         options={[
-          { label: '+86', value: '86' },
-          { label: '+87', value: '87' },
+          { label: "+86", value: "86" },
+          { label: "+87", value: "87" },
         ]}
       />
     </Form.Item>
@@ -55,7 +58,10 @@ export default function RegisterForm() {
       form={form}
       name="register"
       onFinish={onFinish}
-      initialValues={{ residence: ['zhejiang', 'hangzhou', 'xihu'], prefix: '86' }}
+      initialValues={{
+        residence: ["zhejiang", "hangzhou", "xihu"],
+        prefix: "86",
+      }}
       style={{ maxWidth: 600 }}
       scrollToFirstError
     >
@@ -64,12 +70,12 @@ export default function RegisterForm() {
         label="E-mail"
         rules={[
           {
-            type: 'email',
-            message: 'The input is not valid E-mail!',
+            type: "email",
+            message: "The input is not valid E-mail!",
           },
           {
             required: true,
-            message: 'Please input your E-mail!',
+            message: "Please input your E-mail!",
           },
         ]}
       >
@@ -82,7 +88,7 @@ export default function RegisterForm() {
         rules={[
           {
             required: true,
-            message: 'Please input your password!',
+            message: "Please input your password!",
           },
         ]}
         hasFeedback
@@ -93,19 +99,21 @@ export default function RegisterForm() {
       <Form.Item
         name="confirm"
         label="Confirm Password"
-        dependencies={['password']}
+        dependencies={["password"]}
         hasFeedback
         rules={[
           {
             required: true,
-            message: 'Please confirm your password!',
+            message: "Please confirm your password!",
           },
           ({ getFieldValue }) => ({
             validator(_, value) {
-              if (!value || getFieldValue('password') === value) {
+              if (!value || getFieldValue("password") === value) {
                 return Promise.resolve();
               }
-              return Promise.reject(new Error('The new password that you entered do not match!'));
+              return Promise.reject(
+                new Error("The new password that you entered do not match!"),
+              );
             },
           }),
         ]}
@@ -117,7 +125,11 @@ export default function RegisterForm() {
         name="residence"
         label="Habitual Residence"
         rules={[
-          { type: 'array', required: true, message: 'Please input your habitual residence!' },
+          {
+            type: "array",
+            required: true,
+            message: "Please input your habitual residence!",
+          },
         ]}
       >
         <Input />
@@ -126,34 +138,42 @@ export default function RegisterForm() {
       <Form.Item
         name="phone"
         label="Phone Number"
-        rules={[{ required: true, message: 'Please input your phone number!' }]}
+        rules={[{ required: true, message: "Please input your phone number!" }]}
       >
-        <Input addonBefore={prefixSelector} style={{ width: '100%' }} />
+        <Input addonBefore={prefixSelector} style={{ width: "100%" }} />
       </Form.Item>
 
       <Form.Item
         name="gender"
         label="Gender"
-        rules={[{ required: true, message: 'Please select gender!' }]}
+        rules={[{ required: true, message: "Please select gender!" }]}
       >
         <Select
           placeholder="select your gender"
-          defaultValue={'male'}
+          defaultValue={"male"}
           options={[
-            { label: 'Male', value: 'male' },
-            { label: 'Female', value: 'female' },
-            { label: 'Other', value: 'other' },
+            { label: "Male", value: "male" },
+            { label: "Female", value: "female" },
+            { label: "Other", value: "other" },
           ]}
         />
       </Form.Item>
 
-      <Form.Item label="Captcha" extra="We must make sure that your are a human.">
+      <Form.Item
+        label="Captcha"
+        extra="We must make sure that your are a human."
+      >
         <Row gutter={8}>
           <Col span={12}>
             <Form.Item
               name="captcha"
               noStyle
-              rules={[{ required: true, message: 'Please input the captcha you got!' }]}
+              rules={[
+                {
+                  required: true,
+                  message: "Please input the captcha you got!",
+                },
+              ]}
             >
               <Input />
             </Form.Item>
@@ -170,7 +190,9 @@ export default function RegisterForm() {
         rules={[
           {
             validator: (_, value) =>
-              value ? Promise.resolve() : Promise.reject(new Error('Should accept agreement')),
+              value
+                ? Promise.resolve()
+                : Promise.reject(new Error("Should accept agreement")),
           },
         ]}
         {...TAIL_FORM_ITEM_LAYOUT}

@@ -1,4 +1,4 @@
-import type { FormItemProps } from 'antd';
+import type { FormItemProps } from "antd";
 
 /**
  * Standard form layout with labels on the left (desktop) or top (mobile)

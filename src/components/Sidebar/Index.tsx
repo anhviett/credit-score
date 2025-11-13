@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Layout, Menu, Button } from "antd";
-import type { MenuProps } from 'antd';
+import type { MenuProps } from "antd";
 import {
   RadarChartOutlined,
   UserAddOutlined,
@@ -11,7 +11,7 @@ import {
 } from "@ant-design/icons";
 import { useLocation, useNavigate, NavLink } from "react-router-dom";
 import "@assets/css/style.css";
-import mobileBg from '@/assets/images/mobile-bg.webp';
+import mobileBg from "@/assets/images/mobile-bg.webp";
 
 const { Sider } = Layout;
 
@@ -20,7 +20,10 @@ interface SidebarProps {
   onCollapse?: (collapsed: boolean) => void;
 }
 
-const Sidebar: React.FC<SidebarProps> = ({ collapsed: collapsedProp, onCollapse }) => {
+const Sidebar: React.FC<SidebarProps> = ({
+  collapsed: collapsedProp,
+  onCollapse,
+}) => {
   const [internalCollapsed, setInternalCollapsed] = useState<boolean>(() => {
     try {
       return localStorage.getItem("sidebar_collapsed") === "1";
@@ -49,7 +52,9 @@ const Sidebar: React.FC<SidebarProps> = ({ collapsed: collapsedProp, onCollapse 
   const selectedKeys = [location.pathname];
 
   const isControlled = typeof collapsedProp === "boolean";
-  const collapsed = isControlled ? (collapsedProp as boolean) : internalCollapsed;
+  const collapsed = isControlled
+    ? (collapsedProp as boolean)
+    : internalCollapsed;
 
   const handleCollapseChange = (val: boolean) => {
     try {
@@ -80,59 +85,62 @@ const Sidebar: React.FC<SidebarProps> = ({ collapsed: collapsedProp, onCollapse 
       }}
     >
       <div className="px-4 leading-[64px] flex items-center justify-between">
-        {!collapsed && <div className="text-white font-semibold">Credit Score</div>}
+        {!collapsed && (
+          <div className="text-white font-semibold">Credit Score</div>
+        )}
 
         <Button
           type="text"
           onClick={() => handleCollapseChange(!collapsed)}
-          style={{ fontSize: '16px', color: 'white' }}
+          style={{ fontSize: "16px", color: "white" }}
           icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
           aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}
         />
       </div>
 
       {/* use `items` API to avoid deprecated children/SubMenu */}
-      {
-        (() => {
-          const menuItems: MenuProps['items'] = [
-            {
-              key: 'lookup',
-              icon: <RadarChartOutlined />, 
-              label: collapsed ? undefined : 'Tra cứu điểm tín dụng',
-              children: [
-                {
-                  key: '/lookup/new',
-                  icon: <UserAddOutlined />,
-                  label: (
-                    <span onClick={() => navigate('/lookup/new')}>Khách hàng mới</span>
-                  ),
-                },
-                {
-                  key: '/lookup/existing',
-                  icon: <UserOutlined />,
-                  label: (
-                    <span onClick={() => navigate('/lookup/existing')}>Khách hàng hiện hữu</span>
-                  ),
-                },
-              ],
-            },
-          ];
+      {(() => {
+        const menuItems: MenuProps["items"] = [
+          {
+            key: "lookup",
+            icon: <RadarChartOutlined />,
+            label: collapsed ? undefined : "Tra cứu điểm tín dụng",
+            children: [
+              {
+                key: "/lookup/new",
+                icon: <UserAddOutlined />,
+                label: (
+                  <span onClick={() => navigate("/lookup/new")}>
+                    Khách hàng mới
+                  </span>
+                ),
+              },
+              {
+                key: "/lookup/existing",
+                icon: <UserOutlined />,
+                label: (
+                  <span onClick={() => navigate("/lookup/existing")}>
+                    Khách hàng hiện hữu
+                  </span>
+                ),
+              },
+            ],
+          },
+        ];
 
-          return (
-            <Menu
-              theme="light"
-              mode="inline"
-              className="w-full"
-              selectedKeys={selectedKeys}
-              openKeys={collapsed ? [] : openKeys}
-              onOpenChange={(keys) => setOpenKeys(keys as string[])}
-              style={{ borderRight: 0, color: "white" }}
-              items={menuItems}
-            />
-          );
-        })()
-      }
-
+        return (
+          <Menu
+            theme="light"
+            mode="inline"
+            className="w-full"
+            selectedKeys={selectedKeys}
+            openKeys={collapsed ? [] : openKeys}
+            onOpenChange={(keys) => setOpenKeys(keys as string[])}
+            style={{ borderRight: 0, color: "white" }}
+            items={menuItems}
+          />
+        );
+      })()}
     </Sider>
   );
 };
